@@ -1,22 +1,54 @@
 <!DOCTYPE html>
 <html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Merienda Navideña 2025</title>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap"
+			rel="stylesheet" />
+		<link rel="stylesheet" href="style.css" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+	</head>
+	<body>
+		<!-- Canvas para nieve -->
+		<canvas id="snowCanvas"></canvas>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Merienda Navideña</title>
-    <link rel="stylesheet" type="text/css" href="css/estilos.css">
-    <script src="js/script.js"></script>
-</head>
+		<!-- Estrellas de fondo -->
+		<div id="starsContainer"></div>
 
-<body>
-    <div>
-        <img src="images/merienda_navidenya_2025.png" alt="Merienda Navideña">
+		<!-- Contenedor principal -->
+		<div class="container">
+			<div class="title-container">
+				<!-- Cable de luces -->
+				<svg class="light-cable" viewBox="0 0 400 80" preserveAspectRatio="none">
+					<path
+						id="cablePath"
+						d="M 0,40 Q 50,20 100,30 T 200,40 T 300,30 T 400,40"
+						fill="none"
+						stroke="rgba(50, 50, 50, 0.6)"
+						stroke-width="3" />
+				</svg>
 
-        <p>Si el menú de la merienda deseas conocer,<br>
-            las siguientes adivinanzas tendrás que resolver</p>
-        <a href="entrantes.html" class="boton">Comenzar</a>
-    </div>
-</body>
+				<div class="lights-container" id="lightsContainer"></div>
 
+				<h1>
+					<span class="title-word title-word-1">Merienda</span>
+					<span class="title-word title-word-2">Navideña</span>
+					<span class="title-word title-word-3">2025</span>
+				</h1>
+			</div>
+
+			<div class="info">
+				<p>¡Prepárate para la celebración más especial del año!</p>
+				<p>Diciembre 2025 - ¡No faltes!</p>
+				<p class="subtitle">Una noche mágica de compartir y celebrar</p>
+			</div>
+		</div>
+
+		<!-- Bosque navideño -->
+		<div class="forest" id="forest"></div>
+
+		<script src="app.js"></script>
+	</body>
 </html>

@@ -1,0 +1,302 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: "Poppins", sans-serif;
+	background: linear-gradient(180deg, #0a2538 0%, #0d3a28 40%, #0f2c1e 70%, #0a1f15 100%);
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	position: relative;
+	color: #fff;
+}
+
+/* Canvas para copos de nieve */
+#snowCanvas {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	z-index: 1;
+}
+
+/* Contenedor principal */
+.container {
+	width: 90%;
+	max-width: 600px;
+	text-align: center;
+	position: relative;
+	z-index: 10;
+	padding: 20px;
+}
+
+/* Título con efectos modernos */
+.title-container {
+	position: relative;
+	padding: 80px 40px 50px;
+	background: linear-gradient(135deg, rgba(139, 0, 0, 0.15), rgba(0, 100, 0, 0.15));
+	backdrop-filter: blur(12px);
+	border-radius: 30px;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 60px rgba(255, 215, 0, 0.1);
+	border: 2px solid rgba(255, 215, 0, 0.3);
+	margin-bottom: 40px;
+	overflow: visible;
+}
+
+h1 {
+	font-size: clamp(2rem, 8vw, 3.5rem);
+	line-height: 1.3;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.title-word {
+	display: block;
+	font-weight: 700;
+	letter-spacing: 1px;
+	position: relative;
+}
+
+.title-word-1 {
+	color: #ff6b6b;
+	filter: drop-shadow(0 0 15px rgba(255, 107, 107, 0.5));
+}
+
+.title-word-2 {
+	color: #4cd964;
+	font-size: clamp(2.2rem, 9vw, 4rem);
+	filter: drop-shadow(0 0 15px rgba(76, 217, 100, 0.5));
+}
+
+.title-word-3 {
+	color: #ffd700;
+	font-size: clamp(2.5rem, 10vw, 4.5rem);
+	font-weight: 800;
+	filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.7));
+}
+
+/* Cable de luces */
+.light-cable {
+	position: absolute;
+	top: 10px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 90%;
+	height: 80px;
+	z-index: 1;
+	pointer-events: none;
+}
+
+/* Luces navideñas colgando del cable */
+.lights-container {
+	position: absolute;
+	top: -20px;
+	left: -10px;
+	right: 0;
+	height: 100px;
+	pointer-events: none;
+	z-index: 2;
+}
+
+.light-bulb {
+	position: absolute;
+	width: 20px;
+	height: 28px;
+	border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+	background: radial-gradient(circle at 35% 30%, #fff, #e0f7ff);
+	box-shadow: 0 0 15px 3px currentColor;
+	opacity: 0.95;
+	transform-origin: top center;
+}
+
+.light-bulb::before {
+	content: "";
+	position: absolute;
+	top: -8px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 2px;
+	height: 8px;
+	background: rgba(50, 50, 50, 0.7);
+}
+
+.light-bulb::after {
+	content: "";
+	position: absolute;
+	top: -4px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 8px;
+	height: 4px;
+	background: linear-gradient(to bottom, #333, #555);
+	border-radius: 2px 2px 0 0;
+}
+
+/* Colores de las luces */
+.light-red {
+	color: #ff4444;
+}
+.light-yellow {
+	color: #ffeb3b;
+}
+.light-green {
+	color: #4caf50;
+}
+.light-blue {
+	color: #2196f3;
+}
+.light-purple {
+	color: #9c27b0;
+}
+.light-orange {
+	color: #ff9800;
+}
+
+/* Información adicional */
+.info {
+	background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 80, 0, 0.25));
+	backdrop-filter: blur(10px);
+	padding: 30px;
+	border-radius: 20px;
+	border: 2px solid rgba(255, 215, 0, 0.2);
+	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+	line-height: 1.8;
+}
+
+.info p {
+	font-size: clamp(1.1rem, 3vw, 1.4rem);
+	margin-bottom: 15px;
+	text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+	font-weight: 400;
+}
+
+.subtitle {
+	font-family: "Poppins", sans-serif;
+	font-size: clamp(1.3rem, 4vw, 1.8rem);
+	color: #ffd700;
+	margin-top: 10px;
+	font-weight: 600;
+	font-style: italic;
+	filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.4));
+}
+
+/* Bosque navideño mejorado */
+.forest {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 150px;
+	z-index: 5;
+	pointer-events: none;
+}
+
+.tree {
+	position: absolute;
+	bottom: 0;
+}
+
+.tree-part {
+	width: 0;
+	height: 0;
+	border-style: solid;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.tree-top {
+	border-width: 0 15px 35px 15px;
+	border-color: transparent transparent #0d8046 transparent;
+	bottom: 75px;
+}
+
+.tree-middle {
+	border-width: 0 20px 45px 20px;
+	border-color: transparent transparent #0b6e3e transparent;
+	bottom: 40px;
+}
+
+.tree-bottom {
+	border-width: 0 25px 55px 25px;
+	border-color: transparent transparent #0a5c36 transparent;
+	bottom: 0;
+}
+
+.tree-trunk {
+	position: absolute;
+	width: 12px;
+	height: 25px;
+	background: linear-gradient(to right, #6b3410, #8b4513, #6b3410);
+	bottom: -25px;
+	left: 50%;
+	transform: translateX(-50%);
+	border-radius: 0 0 2px 2px;
+}
+
+.ornament {
+	position: absolute;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	z-index: 1;
+}
+
+/* Estrellas en el fondo */
+.star {
+	position: fixed;
+	width: 2px;
+	height: 2px;
+	background: white;
+	border-radius: 50%;
+	pointer-events: none;
+	z-index: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.title-container {
+		padding: 70px 30px 40px;
+	}
+
+	.info {
+		padding: 25px;
+	}
+
+	.forest {
+		height: 120px;
+	}
+
+	.light-bulb {
+		width: 18px;
+		height: 25px;
+	}
+}
+
+@media (max-width: 480px) {
+	.title-container {
+		padding: 60px 25px 35px;
+	}
+
+	.light-bulb {
+		width: 16px;
+		height: 22px;
+	}
+
+	.forest {
+		height: 100px;
+	}
+
+	.light-cable {
+		width: 95%;
+	}
+}
