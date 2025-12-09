@@ -1,0 +1,45 @@
+# .github/workflows/deploy.yml
+
+name: Despliegue en GitHub Pages
+
+# Define cuándo se ejecutará el flujo de trabajo (en push a main)
+on:
+  push:
+    branches: ["main"]
+
+# 1. Configuración de Permisos (¡CRÍTICO para solucionar el 'Not Found'!)
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  # Job 1: Build (Construcción y Carga del Artefacto)
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Si tu repositorio solo tiene archivos HTML, CSS, JS en la raíz:
+      - name: Configurar Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      # El artefacto es el directorio que quieres que se sirva (aquí asumimos la raíz)
+      - name: Subir Artefacto
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './' # Carga todos los archivos de la raíz del repositorio
+
+  # Job 2: Deploy (Despliegue Final)
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build # Depende de que el Job de 'build' termine
+    steps:
+      - name: Desplegar a GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
