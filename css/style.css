@@ -170,6 +170,10 @@ h1 {
 	border: 2px solid rgba(255, 215, 0, 0.2);
 	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
 	line-height: 1.8;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 
 .info p {
@@ -299,4 +303,72 @@ h1 {
 	.light-cable {
 		width: 95%;
 	}
+}
+/* From Uiverse.io by vinodjangid07 */
+.reward-btn {
+	width: 160px;
+	height: 40px;
+	background: linear-gradient(135deg, rgba(0, 100, 0, 0.3), rgba(76, 217, 100, 0.25));
+	backdrop-filter: blur(10px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 2px solid rgba(255, 215, 0, 0.5);
+	border-radius: 8px;
+	cursor: pointer;
+	transition: all 0.3s;
+	margin: 0 auto;
+	box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+}
+.IconContainer {
+	width: 40px;
+	height: 40px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+.IconContainer svg {
+	width: 40%;
+	z-index: 3;
+}
+.box-top {
+	transition: all 0.3s;
+}
+.text {
+	font-size: 13px;
+	color: #ffd700;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	font-weight: 600;
+	text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+.text a {
+	color: inherit;
+	text-decoration: none;
+}
+.reward-btn:hover .IconContainer .box-top {
+	transform: translateY(-5px);
+}
+.reward-btn:hover {
+	background: linear-gradient(135deg, rgba(139, 0, 0, 0.4), rgba(255, 107, 107, 0.3));
+	border-color: #ff6b6b;
+	box-shadow: 0 6px 25px rgba(255, 107, 107, 0.4);
+}
+.reward-btn:hover .coin {
+	transform: translateY(-5px);
+	transition-delay: 0.2s;
+}
+.coin {
+	width: 25%;
+	height: 25%;
+	background-color: #e4d61a;
+	position: absolute;
+	border-radius: 50%;
+	transition: all 0.3s;
+	z-index: 1;
+	border: 2px solid #ffe956;
+	margin-top: 4px;
 }
