@@ -1,22 +1,166 @@
 <!DOCTYPE html>
 <html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>¡Menú Completado!</title>
+		<link rel="stylesheet" type="text/css" href="./css/fin.css" />
+		<!-- GSAP para animaciones -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+	</head>
+	<body>
+		<!-- Canvas para efectos especiales -->
+		<canvas id="celebrationCanvas"></canvas>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Merienda</title>
-    <link rel="stylesheet" type="text/css" href="css/estilos.css">
-    <script src="js/script.js"></script>
-</head>
+		<!-- Popup para mostrar detalles del menú -->
+		<div class="popup-overlay" id="popupOverlay">
+			<div class="popup-container">
+				<button class="popup-close" id="popupClose">×</button>
+				<div class="popup-header">
+					<span class="popup-icon" id="popupIcon">🎄</span>
+					<h2 class="popup-title" id="popupTitle">Entrantes</h2>
+				</div>
+				<div class="popup-content">
+					<div class="popup-menu-content" id="popupMenuContent">
+						<!-- El contenido del menú se cargará aquí dinámicamente -->
+					</div>
+				</div>
+				<div class="popup-footer">
+					<button class="popup-btn" id="popupCloseBtn">Cerrar</button>
+				</div>
+			</div>
+		</div>
 
-<body>
-    <div>
-        <h1>Disfruta de la merienda</h1>
-        <img src="images/entrantes.png" alt="entrantes" id="img_entrantes">
-        <img src="images/principales.png" alt="principales" id="img_principales">
-        <img src="images/postres.png" alt="postres" id="img_postres">
-        <img src="images/bebidas.png" alt="bebidas" id="img_bebidas">
-    </div>
-</body>
+		<!-- Contenedor principal -->
+		<div class="final-container">
+			<!-- Encabezado épico -->
+			<header class="final-header">
+				<div class="header-bg"></div>
+				<div class="header-content">
+					<div class="trophy-container">
+						<div class="trophy">🏆</div>
+						<div class="trophy-glow"></div>
+					</div>
+					<h1 class="final-title">
+						<span class="title-line">¡MENÚ</span>
+						<span class="title-line highlight">COMPLETADO!</span>
+					</h1>
+					<p class="final-subtitle">Has superado todas las pruebas del banquete navideño</p>
+					<div class="confetti-burst"></div>
+				</div>
+			</header>
 
+			<!-- Contenido principal -->
+			<main class="final-main">
+				<!-- Sección de celebración -->
+				<section class="celebration-section">
+					<div class="celebration-card">
+						<h2 class="celebration-title">🎉 ¡Felicidades! 🎉</h2>
+						<p class="celebration-text">
+							Has demostrado ser un verdadero experto en el banquete navideño de administración. Cada
+							plato representaba un desafío y lo has superado con éxito.
+						</p>
+
+						<div class="team-badge">
+							<span class="badge-icon">🎄</span>
+							<span class="badge-text">Colaboración DAW & Administración</span>
+						</div>
+					</div>
+
+					<!-- Galería de imágenes -->
+					<div class="gallery-section">
+						<h3 class="gallery-title">Tu Menú Completado</h3>
+						<div class="image-gallery">
+							<div class="gallery-item" data-category="entrantes">
+								<div class="image-frame">
+									<img src="images/entrantes.png" alt="Entrantes" class="gallery-image" />
+									<div class="image-overlay">
+										<span class="image-label">Entrantes</span>
+										<span class="image-status">✅</span>
+									</div>
+								</div>
+							</div>
+							<div class="gallery-item" data-category="principales">
+								<div class="image-frame">
+									<img src="images/principales.png" alt="Principales" class="gallery-image" />
+									<div class="image-overlay">
+										<span class="image-label">Principales</span>
+										<span class="image-status">✅</span>
+									</div>
+								</div>
+							</div>
+							<div class="gallery-item" data-category="postres">
+								<div class="image-frame">
+									<img src="images/postres.png" alt="Postres" class="gallery-image" />
+									<div class="image-overlay">
+										<span class="image-label">Postres</span>
+										<span class="image-status">✅</span>
+									</div>
+								</div>
+							</div>
+							<div class="gallery-item" data-category="bebidas">
+								<div class="image-frame">
+									<img src="images/bebidas.png" alt="Bebidas" class="gallery-image" />
+									<div class="image-overlay">
+										<span class="image-label">Bebidas</span>
+										<span class="image-status">✅</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- Mensaje final -->
+				<section class="message-section">
+					<div class="message-card">
+						<div class="message-icon">🍽️</div>
+						<h3 class="message-title">¡Disfruta de la Merienda Navideña!</h3>
+						<p class="message-text">
+							Has completado exitosamente este banquete de conocimientos en administración. Cada plato
+							representaba un área crucial de la gestión empresarial moderna, y has demostrado dominio en
+							todas ellas.
+						</p>
+						<p class="message-text">
+							Ahora es momento de disfrutar del fruto de tu esfuerzo. ¡Felices fiestas y mucho éxito en
+							tus futuros desafíos profesionales!
+						</p>
+
+						<div class="final-actions">
+							<button class="final-btn restart-btn" onclick="reiniciarJuego()">
+								<span class="btn-icon">🔄</span>
+								<span class="btn-text">Volver al Inicio</span>
+							</button>
+						</div>
+
+						<div class="signature">
+							<p>Un proyecto conjunto de:</p>
+							<div class="team-signatures">
+								<div class="team">
+									<p class="team-name">Grado Superior en</p>
+									<p class="team-title">Desarrollo de Aplicaciones Web</p>
+								</div>
+								<div class="team">
+									<p class="team-name">Grado Superior en</p>
+									<p class="team-title">Administración y Finanzas</p>
+								</div>
+							</div>
+							<p class="signature-date">Navidad 2025</p>
+						</div>
+					</div>
+				</section>
+			</main>
+
+			<!-- Footer final -->
+			<footer class="final-footer">
+				<div class="footer-content">
+					<div class="footer-logo">🎄</div>
+					<p class="footer-text">Banquete Navideño de Administración</p>
+					<p class="footer-copyright">Un proyecto educativo conjunto</p>
+				</div>
+			</footer>
+		</div>
+
+		<script src="./js/fin.js"></script>
+	</body>
 </html>
