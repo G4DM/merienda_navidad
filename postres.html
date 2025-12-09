@@ -1,63 +1,180 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Postres</title>
-    <link rel="stylesheet" type="text/css" href="css/estilos.css">
-    <script src="js/script.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/preguntas.css">
+    <!-- GSAP para animaciones -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
-
 <body>
-    <div>
-        <img src="images/postres.png" alt="postres" class="imagen_difuminada" id="img_postres">
-        <div id="div_p1">
-            <p>Postre 1</p>
-            <p>Dulce mezcla internacional con vocabulario suave, expresiones deliciosas y un toque de pronunciación “aprobadita”.
-            </p>
-            <form action="#" method="post" id="form_postres1">
-                <input type="radio" id="resp_postre1" name="entrante" value="resp_postre1">
-                <label for="resp_postre1">Limonada de Sostenibilidad Aplicada al Sistema Productivo</label><br>
-
-                <input type="radio" id="resp_postre2" name="entrante" value="resp_postre2">
-                <label for="resp_postre2">Café de Digitalización Aplicada al Sistema Productivo</label><br>
-
-                <input type="radio" id="resp_postre3" name="entrante" value="resp_postre3">
-                <label for="resp_postre3">Tarta Lingüística de Francés e Inglés</label><br>
-
-                <input type="radio" id="resp_postre4" name="entrante" value="resp_postre4">
-                <label for="resp_postre4">Flan de Itinerario Personal para la Empleabilidad</label><br>
-
-                <button type="reset" class="boton" onclick="verificarRespuesta('pregunta7')">Enviar respuesta</button>
-            </form>
-
-        </div>
-        <div id="div_p2" style="display: none">
-            <p>Postre 2</p>
-            <p>Suave, motivador y lleno de futuro… pero servido con la típica pregunta: “¿Y tú qué quieres hacer con tu vida?”
-            </p>
-            <form action="#" method="post" id="form_postres2">
-                <input type="radio" id="resp_postre5" name="entrante" value="resp_postre5">
-                <label for="resp_postre5">Limonada de Sostenibilidad Aplicada al Sistema Productivo</label><br>
-
-                <input type="radio" id="resp_postre6" name="entrante" value="resp_postre6">
-                <label for="resp_postre6">Café de Digitalización Aplicada al Sistema Productivo</label><br>
-
-                <input type="radio" id="resp_postre7" name="entrante" value="resp_postre7">
-                <label for="resp_postre7">Tarta Lingüística de Francés e Inglés</label><br>
-
-                <input type="radio" id="resp_postre8" name="entrante" value="resp_postre8">
-                <label for="resp_postre8">Flan de Itinerario Personal para la Empleabilidad</label><br>
-
-                <button type="reset" class="boton" onclick="verificarRespuesta('pregunta8')">Enviar respuesta</button>
-            </form>
-
-        </div>
-        <div id="div_continuar"  style="display: none">
-            <a href="bebidas.html" class="boton">Continuar</a>
-        </div>
+    <!-- Canvas para efectos visuales -->
+    <canvas id="snowCanvas"></canvas>
+    
+    <div class="mobile-container">
+        <!-- Cabecera móvil -->
+        <header class="mobile-header">
+            <div class="header-content">
+                <h1 class="mobile-title">🍰 Postres 🍰</h1>
+                <p class="mobile-subtitle">Responde las 2 preguntas para continuar</p>
+            </div>
+        </header>
+        
+        <!-- Contenido principal -->
+        <main class="mobile-main">
+            <!-- Progreso -->
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text" id="progressText">Pregunta 1 de 2</div>
+            </div>
+            
+            <!-- Imagen -->
+            <div class="image-container">
+                <img src="images/postres.png" alt="postres" class="mobile-image" id="img_postres">
+            </div>
+            
+            <!-- Preguntas -->
+            <div class="questions-container">
+                <!-- Pregunta 1 -->
+                <div id="div_p1" class="question-card active">
+                    <div class="question-header">
+                        <span class="question-number">❶</span>
+                        <h2 class="question-title">Postre 1</h2>
+                    </div>
+                    
+                    <p class="question-description">
+                        Dulce mezcla internacional con vocabulario suave, expresiones deliciosas y un toque de pronunciación "aprobadita".
+                    </p>
+                    
+                    <form id="form_postres1" class="question-form">
+                        <div class="option-card">
+                            <input type="radio" id="resp_postre1" name="postre" value="resp_postre1">
+                            <label for="resp_postre1" class="option-label">
+                                <span class="option-letter">A</span>
+                                <span class="option-text">Limonada de Sostenibilidad Aplicada al Sistema Productivo</span>
+                            </label>
+                        </div>
+                        
+                        <div class="option-card">
+                            <input type="radio" id="resp_postre2" name="postre" value="resp_postre2">
+                            <label for="resp_postre2" class="option-label">
+                                <span class="option-letter">B</span>
+                                <span class="option-text">Café de Digitalización Aplicada al Sistema Productivo</span>
+                            </label>
+                        </div>
+                        
+                        <div class="option-card">
+                            <input type="radio" id="resp_postre3" name="postre" value="resp_postre3">
+                            <label for="resp_postre3" class="option-label">
+                                <span class="option-letter">C</span>
+                                <span class="option-text">Tarta Lingüística de Francés e Inglés</span>
+                            </label>
+                        </div>
+                        
+                        <div class="option-card">
+                            <input type="radio" id="resp_postre4" name="postre" value="resp_postre4">
+                            <label for="resp_postre4" class="option-label">
+                                <span class="option-letter">D</span>
+                                <span class="option-text">Flan de Itinerario Personal para la Empleabilidad</span>
+                            </label>
+                        </div>
+                        
+                        <button type="button" class="mobile-btn primary-btn" onclick="verificarRespuesta('pregunta1', 'postres')">
+                            <span class="btn-text">Enviar respuesta</span>
+                            <span class="btn-icon">✓</span>
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Pregunta 2 -->
+                <div id="div_p2" class="question-card">
+                    <div class="question-header">
+                        <span class="question-number">❷</span>
+                        <h2 class="question-title">Postre 2</h2>
+                    </div>
+                    
+                    <p class="question-description">
+                        Suave, motivador y lleno de futuro… pero servido con la típica pregunta: "¿Y tú qué quieres hacer con tu vida?"
+                    </p>
+                    
+                    <form id="form_postres2" class="question-form">
+                        <div class="option-card">
+                            <input type="radio" id="resp_postre5" name="postre" value="resp_postre5">
+                            <label for="resp_postre5" class="option-label">
+                                <span class="option-letter">A</span>
+                                <span class="option-text">Limonada de Sostenibilidad Aplicada al Sistema Productivo</span>
+                            </label>
+                        </div>
+                        
+                        <div class="option-card">
+                            <input type="radio" id="resp_postre6" name="postre" value="resp_postre6">
+                            <label for="resp_postre6" class="option-label">
+                                <span class="option-letter">B</span>
+                                <span class="option-text">Café de Digitalización Aplicada al Sistema Productivo</span>
+                            </label>
+                        </div>
+                        
+                        <div class="option-card">
+                            <input type="radio" id="resp_postre7" name="postre" value="resp_postre7">
+                            <label for="resp_postre7" class="option-label">
+                                <span class="option-letter">C</span>
+                                <span class="option-text">Tarta Lingüística de Francés e Inglés</span>
+                            </label>
+                        </div>
+                        
+                        <div class="option-card">
+                            <input type="radio" id="resp_postre8" name="postre" value="resp_postre8">
+                            <label for="resp_postre8" class="option-label">
+                                <span class="option-letter">D</span>
+                                <span class="option-text">Flan de Itinerario Personal para la Empleabilidad</span>
+                            </label>
+                        </div>
+                        
+                        <button type="button" class="mobile-btn primary-btn" onclick="verificarRespuesta('pregunta2', 'postres')">
+                            <span class="btn-text">Enviar respuesta</span>
+                            <span class="btn-icon">✓</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Botón continuar -->
+            <div id="div_continuar" class="continue-container" style="display: none">
+                <div class="success-message">
+                    <div class="success-icon">🍮</div>
+                    <h3 class="success-title">¡Dulce victoria!</h3>
+                    <p class="success-text">Has superado todos los postres</p>
+                </div>
+                
+                <a href="bebidas.html" class="mobile-btn success-btn">
+                    <span class="btn-text">Ir a las Bebidas</span>
+                    <span class="btn-icon">🥤</span>
+                </a>
+                
+                <div class="mobile-tip">
+                    🎉 Tip: ¡Ya casi terminas! Solo falta la última parte
+                </div>
+            </div>
+        </main>
+        
+        <!-- Footer móvil -->
+        <footer class="mobile-footer">
+            <div class="footer-content">
+                <div class="footer-item">
+                    <span class="footer-icon">🍰</span>
+                    <span class="footer-text">Postres</span>
+                </div>
+                <div class="footer-item">
+                    <span class="footer-icon">🎯</span>
+                    <span class="footer-text">Nivel: 3/4</span>
+                </div>
+            </div>
+        </footer>
     </div>
-</body>
 
+    <script src="./js/preguntas.js"></script>
+</body>
 </html>

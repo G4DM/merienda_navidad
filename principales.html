@@ -1,85 +1,233 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Principales</title>
-    <link rel="stylesheet" type="text/css" href="css/estilos.css">
-    <script src="js/script.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Platos Principales</title>
+    <link rel="stylesheet" type="text/css" href="./css/preguntas.css">
+    <!-- GSAP para animaciones -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
-
 <body>
-    <div>
-        <img src="images/principales.png" alt="principales" class="imagen_difuminada" id="img_principales">
-        <div id="div_p1">
-            <p>Principal 1</p>
-            <p>Capas infinitas de documentos, PDFs que nadie revisa y una salsa secreta llamada
-                "¿Pero dónde guardé este archivo?"
-            </p>
-            <form action="#" method="post" id="form_principales1">
-                <input type="radio" id="resp_prin1" name="entrante" value="resp_prin1">
-                <label for="resp_prin1">Estofado de Gestión Financiera</label><br>
-
-                <input type="radio" id="resp_prin2" name="entrante" value="resp_prin2">
-                <label for="resp_prin2">Lasaña de Gestión Avanzada de la Información</label><br>
-
-                <input type="radio" id="resp_prin3" name="entrante" value="resp_prin3">
-                <label for="resp_prin3">Linguini de Lenguaje de Marcas</label><br>
-
-                <input type="radio" id="resp_prin4" name="entrante" value="resp_prin4">
-                <label for="resp_prin4">Tarta Lingüística de Francés e Inglés</label><br>
-
-                <button type="reset" class="boton" onclick="verificarRespuesta('pregunta4')">Enviar respuesta</button>
-            </form>
-
-        </div>
-        <div id="div_p2" style="display: none">
-            <p>Principal 2</p>
-            <p>Cocción lenta de presupuestos, gastos y previsiones,
-                servido con aroma a “este Excel pide clemencia”.
-            </p>
-            <form action="#" method="post" id="form_principales2">
-                <input type="radio" id="resp_prin5" name="entrante" value="resp_prin5">
-                <label for="resp_prin5">Estofado de Gestión Financiera</label><br>
-
-                <input type="radio" id="resp_prin6" name="entrante" value="resp_prin6">
-                <label for="resp_prin6">Lasaña de Gestión Avanzada de la Información</label><br>
-
-                <input type="radio" id="resp_prin7" name="entrante" value="resp_prin7">
-                <label for="resp_prin7">Linguini de Lenguaje de Marcas</label><br>
-
-                <input type="radio" id="resp_prin8" name="entrante" value="resp_prin8">
-                <label for="resp_prin8">Tarta Lingüística de Francés e Inglés</label><br>
-
-                <button type="reset" class="boton" onclick="verificarRespuesta('pregunta5')">Enviar respuesta</button>
-            </form>
-
-        </div>
-        <div id="div_p3" style="display: none">
-            <p>Principal 3</p>
-            <p>Tiras de etiquetas perfectamente ordenadas, con un aliño suave de HTML que se rompe por un cierre mal puesto.
-            </p>
-            <form action="#" method="post" id="form_principales3">
-                <input type="radio" id="resp_prin9" name="entrante" value="resp_prin9">
-                <label for="resp_prin9">Estofado de Gestión Financiera</label><br>
-
-                <input type="radio" id="resp_prin10" name="entrante" value="resp_prin10">
-                <label for="resp_prin10">Lasaña de Gestión Avanzada de la Información</label><br>
-
-                <input type="radio" id="resp_prin11" name="entrante" value="resp_prin11">
-                <label for="resp_prin11">Linguini de Lenguaje de Marcas</label><br>
-
-                <input type="radio" id="resp_prin12" name="entrante" value="resp_prin12">
-                <label for="resp_prin12">Tarta Lingüística de Francés e Inglés</label><br>
-
-                <button type="reset" class="boton" onclick="verificarRespuesta('pregunta6')">Enviar respuesta</button>
-            </form>
-        </div>
-        <div id="div_continuar"  style="display: none">
-            <a href="postres.html" class="boton">Continuar</a>
-        </div>
+    <!-- Canvas para efectos visuales -->
+    <canvas id="snowCanvas"></canvas>
+    
+    <div class="mobile-container">
+        <!-- Cabecera móvil -->
+        <header class="mobile-header">
+            <div class="header-content">
+                <h1 class="mobile-title">🍽️ Platos Principales 🍽️</h1>
+                <p class="mobile-subtitle">Responde las 3 preguntas para continuar</p>
+            </div>
+        </header>
+        
+        <!-- Contenido principal -->
+        <main class="mobile-main">
+            <!-- Progreso -->
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text" id="progressText">Pregunta 1 de 3</div>
+            </div>
+            
+            <!-- Imagen -->
+            <div class="image-container">
+                <img src="images/principales.png" alt="principales" class="mobile-image" id="img_principales">
+            </div>
+            
+            <!-- Preguntas -->
+            <div class="questions-container">
+                <!-- Pregunta 1 -->
+                <div id="div_p1" class="question-card active">
+                    <div class="question-header">
+                        <span class="question-number">❶</span>
+                        <h2 class="question-title">Plato Principal 1</h2>
+                    </div>
+                    
+                    <p class="question-description">
+                        Capas infinitas de documentos, PDFs que nadie revisa y una salsa secreta llamada
+                        "¿Pero dónde guardé este archivo?"
+                    </p>
+                    
+                    <form id="form_principales1" class="question-form">
+                        <div class="option-card">
+                            <input type="radio" id="resp_prin1" name="principal" value="resp_prin1">
+                            <label for="resp_prin1" class="option-label">
+                                <span class="option-letter">A</span>
+                                <span class="option-text">Estofado de Gestión Financiera</span>
+                            </label>
+                        </div>
+                        
+                        <div class="option-card">
+                            <input type="radio" id="resp_prin2" name="principal" value="resp_prin2">
+                            <label for="resp_prin2" class="option-label">
+                                <span class="option-letter">B</span>
+                                <span class="option-text">Lasaña de Gestión Avanzada de la Información</span>
+                            </label>
+                        </div>
+                        
+                        <div class="option-card">
+                            <input type="radio" id="resp_prin3" name="principal" value="resp_prin3">
+                            <label for="resp_prin3" class="option-label">
+                                <span class="option-letter">C</span>
+                                <span class="option-text">Linguini de Lenguaje de Marcas</span>
+                            </label>
+                        </div>
+                        
+                        <div class="option-card">
+                            <input type="radio" id="resp_prin4" name="principal" value="resp_prin4">
+                            <label for="resp_prin4" class="option-label">
+                                <span class="option-letter">D</span>
+                                <span class="option-text">Tarta Lingüística de Francés e Inglés</span>
+                            </label>
+                        </div>
+                        
+                        <button type="button" class="mobile-btn primary-btn" onclick="verificarRespuesta('pregunta1', 'principales')">
+                            <span class="btn-text">Enviar respuesta</span>
+                            <span class="btn-icon">✓</span>
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Pregunta 2 -->
+                <div id="div_p2" class="question-card">
+                    <div class="question-header">
+                        <span class="question-number">❷</span>
+                        <h2 class="question-title">Plato Principal 2</h2>
+                    </div>
+                    
+                    <p class="question-description">
+                        Cocción lenta de presupuestos, gastos y previsiones,
+                        servido con aroma a "este Excel pide clemencia".
+                    </p>
+                    
+                    <form id="form_principales2" class="question-form">
+                        <div class="option-card">
+                            <input type="radio" id="resp_prin5" name="principal" value="resp_prin5">
+                            <label for="resp_prin5" class="option-label">
+                                <span class="option-letter">A</span>
+                                <span class="option-text">Estofado de Gestión Financiera</span>
+                            </label>
+                        </div>
+                        
+                        <div class="option-card">
+                            <input type="radio" id="resp_prin6" name="principal" value="resp_prin6">
+                            <label for="resp_prin6" class="option-label">
+                                <span class="option-letter">B</span>
+                                <span class="option-text">Lasaña de Gestión Avanzada de la Información</span>
+                            </label>
+                        </div>
+                        
+                        <div class="option-card">
+                            <input type="radio" id="resp_prin7" name="principal" value="resp_prin7">
+                            <label for="resp_prin7" class="option-label">
+                                <span class="option-letter">C</span>
+                                <span class="option-text">Linguini de Lenguaje de Marcas</span>
+                            </label>
+                        </div>
+                        
+                        <div class="option-card">
+                            <input type="radio" id="resp_prin8" name="principal" value="resp_prin8">
+                            <label for="resp_prin8" class="option-label">
+                                <span class="option-letter">D</span>
+                                <span class="option-text">Tarta Lingüística de Francés e Inglés</span>
+                            </label>
+                        </div>
+                        
+                        <button type="button" class="mobile-btn primary-btn" onclick="verificarRespuesta('pregunta2', 'principales')">
+                            <span class="btn-text">Enviar respuesta</span>
+                            <span class="btn-icon">✓</span>
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Pregunta 3 -->
+                <div id="div_p3" class="question-card">
+                    <div class="question-header">
+                        <span class="question-number">❸</span>
+                        <h2 class="question-title">Plato Principal 3</h2>
+                    </div>
+                    
+                    <p class="question-description">
+                        Tiras de etiquetas perfectamente ordenadas, con un aliño suave de HTML que se rompe por un cierre mal puesto.
+                    </p>
+                    
+                    <form id="form_principales3" class="question-form">
+                        <div class="option-card">
+                            <input type="radio" id="resp_prin9" name="principal" value="resp_prin9">
+                            <label for="resp_prin9" class="option-label">
+                                <span class="option-letter">A</span>
+                                <span class="option-text">Estofado de Gestión Financiera</span>
+                            </label>
+                        </div>
+                        
+                        <div class="option-card">
+                            <input type="radio" id="resp_prin10" name="principal" value="resp_prin10">
+                            <label for="resp_prin10" class="option-label">
+                                <span class="option-letter">B</span>
+                                <span class="option-text">Lasaña de Gestión Avanzada de la Información</span>
+                            </label>
+                        </div>
+                        
+                        <div class="option-card">
+                            <input type="radio" id="resp_prin11" name="principal" value="resp_prin11">
+                            <label for="resp_prin11" class="option-label">
+                                <span class="option-letter">C</span>
+                                <span class="option-text">Linguini de Lenguaje de Marcas</span>
+                            </label>
+                        </div>
+                        
+                        <div class="option-card">
+                            <input type="radio" id="resp_prin12" name="principal" value="resp_prin12">
+                            <label for="resp_prin12" class="option-label">
+                                <span class="option-letter">D</span>
+                                <span class="option-text">Tarta Lingüística de Francés e Inglés</span>
+                            </label>
+                        </div>
+                        
+                        <button type="button" class="mobile-btn primary-btn" onclick="verificarRespuesta('pregunta3', 'principales')">
+                            <span class="btn-text">Enviar respuesta</span>
+                            <span class="btn-icon">✓</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Botón continuar -->
+            <div id="div_continuar" class="continue-container" style="display: none">
+                <div class="success-message">
+                    <div class="success-icon">🎊</div>
+                    <h3 class="success-title">¡Excelente!</h3>
+                    <p class="success-text">Has completado todos los platos principales</p>
+                </div>
+                
+                <a href="postres.html" class="mobile-btn success-btn">
+                    <span class="btn-text">Ir a los Postres</span>
+                    <span class="btn-icon">🍰</span>
+                </a>
+                
+                <div class="mobile-tip">
+                    🎯 Tip: Los postres son la parte más dulce
+                </div>
+            </div>
+        </main>
+        
+        <!-- Footer móvil -->
+        <footer class="mobile-footer">
+            <div class="footer-content">
+                <div class="footer-item">
+                    <span class="footer-icon">🍽️</span>
+                    <span class="footer-text">Platos Principales</span>
+                </div>
+                <div class="footer-item">
+                    <span class="footer-icon">🎯</span>
+                    <span class="footer-text">Nivel: 2/4</span>
+                </div>
+            </div>
+        </footer>
     </div>
-</body>
 
+    <script src="./js/preguntas.js"></script>
+</body>
 </html>
